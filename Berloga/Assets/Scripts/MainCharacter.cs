@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
         Move();
         Jump();
         CameraMove();
-        FlipSprite();
+        Flip();
     }
 
     private void Move()
@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
         _camera.transform.position = Vector3.Lerp(_camera.transform.position, targetPosition, Time.deltaTime * _smoothness);
     }
 
-    private void FlipSprite()
+    private void Flip()
     {
         Vector3 currentScale = transform.localScale;
         if (rb.velocity.x < 0)
