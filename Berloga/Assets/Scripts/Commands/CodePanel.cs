@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,16 +12,19 @@ public class CodePanel : MonoBehaviour
     [SerializeField]
     private GameObject _removeHint;
     [SerializeField]
-    private Transform _content;
+    private Transform _commandsContent;
+    [SerializeField]
+    private Transform _codeContent;
+    [SerializeField]
+    private GameObject _owner;
 
     void Start()
     {
-        
-    }
-
-    void Update()
-    {
-        
+        var commands = _owner.GetComponents<Command>();
+        foreach (var command in commands)
+        {
+            CommandView.Create(command.CommandView, transform, command, _commandsContent);
+        }
     }
 
     public void ToggleHints(bool value)
@@ -33,7 +37,7 @@ public class CodePanel : MonoBehaviour
     {
         if (dropObject == _addHint)
         {
-            gameObject.transform.parent = _content;
+            gameObject.transform.SetParent(_codeContent);
         }
         else if (dropObject == _removeHint)
         {

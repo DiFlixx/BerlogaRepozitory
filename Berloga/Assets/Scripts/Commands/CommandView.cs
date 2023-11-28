@@ -1,20 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class CommandView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    
-    private CommandView _cloneObj;
-    private CodePanel _codePanel;
-
+    public Command Command { get; set; }
     public Image Image { get; private set; }
     public RectTransform RectTransform { get; private set; }
     public bool IsCloned { get; set; }
 
     [SerializeField]
+    private TextMeshProUGUI _commandText;
+    private CommandView _cloneObj;
+    private CodePanel _codePanel;
     private Transform _parent;
 
     private void Awake()
@@ -29,18 +30,26 @@ public class CommandView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         _codePanel.ToggleHints(true);
         if (!IsCloned)
         {
-            _cloneObj = Instantiate(this);
-            _cloneObj.transform.SetParent(_parent, false);
+            _cloneObj = Create(this, _parent, Command, _parent);
             _cloneObj.RectTransform.position = RectTransform.position;
             _cloneObj.IsCloned = true;
             _cloneObj.Image.raycastTarget = false;
         }
         else
         {
-            transform.SetParent(_parent, false);
+            transform.SetParent(_parent, true);
             Image.raycastTarget = false;
         }
         
+    }
+
+    public static CommandView Create(CommandView obj, Transform parent, Command command, Transform commandContent)
+    {
+        var view = Instantiate(obj, commandContent);
+        view._parent = parent;
+        view.Command = command;
+        view._commandText.text = command.CommandName;
+        return view;
     }
 
     public void OnDrag(PointerEventData eventData)
