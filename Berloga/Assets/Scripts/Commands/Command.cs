@@ -12,5 +12,5 @@ public abstract class Command : MonoBehaviour
     [SerializeField]
     private string _commandName;
 
-    public abstract void Execute();
+    public abstract IEnumerator Execute();
 }

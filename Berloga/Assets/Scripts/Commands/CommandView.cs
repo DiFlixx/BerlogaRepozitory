@@ -16,13 +16,11 @@ public class CommandView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     private TextMeshProUGUI _commandText;
     private CommandView _cloneObj;
     private CodePanel _codePanel;
-    private Transform _parent;
 
     private void Awake()
     {
         RectTransform = GetComponent<RectTransform>();
         Image = GetComponent<Image>();
-        _codePanel = FindObjectOfType<CodePanel>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -30,23 +28,23 @@ public class CommandView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         _codePanel.ToggleHints(true);
         if (!IsCloned)
         {
-            _cloneObj = Create(this, _parent, Command, _parent);
+            _cloneObj = Create(this, _codePanel, Command, _codePanel.transform);
             _cloneObj.RectTransform.position = RectTransform.position;
             _cloneObj.IsCloned = true;
             _cloneObj.Image.raycastTarget = false;
         }
         else
         {
-            transform.SetParent(_parent, true);
+            transform.SetParent(_codePanel.transform, true);
             Image.raycastTarget = false;
         }
-        
+        _codePanel.UpdateUI();
     }
 
-    public static CommandView Create(CommandView obj, Transform parent, Command command, Transform commandContent)
+    public static CommandView Create(CommandView obj, CodePanel codePanel, Command command, Transform parent)
     {
-        var view = Instantiate(obj, commandContent);
-        view._parent = parent;
+        var view = Instantiate(obj, parent);
+        view._codePanel = codePanel;
         view.Command = command;
         view._commandText.text = command.CommandName;
         return view;
@@ -63,23 +61,10 @@ public class CommandView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         {
             RectTransform.position += (Vector3)eventData.delta;
         }
-        
-    }
-
-    void Start()
-    {
-        
-    }
-
-    
-    void Update()
-    {
-        
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log(eventData.pointerEnter);
         if (!IsCloned)
         {
             _cloneObj.Image.raycastTarget = true;
@@ -92,5 +77,6 @@ public class CommandView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             _codePanel.HandleDrop(gameObject, eventData.pointerEnter);
         }
         _codePanel.ToggleHints(false);
+        _codePanel.UpdateUI();
     }
 }

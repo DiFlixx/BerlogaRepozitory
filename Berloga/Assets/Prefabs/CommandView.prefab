@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 3145911323296425168}
   - component: {fileID: 2777275366860303438}
   m_Layer: 5
-  m_Name: CommandBar
-  m_TagString: Untagged
+  m_Name: CommandView
+  m_TagString: CommandView
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 4991547295133381224}
   m_Layer: 5
   m_Name: Text
-  m_TagString: Untagged
+  m_TagString: CommandView
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
