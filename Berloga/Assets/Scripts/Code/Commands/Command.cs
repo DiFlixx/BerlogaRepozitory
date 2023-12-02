@@ -12,5 +12,12 @@ public abstract class Command : MonoBehaviour
     [SerializeField]
     private string _commandName;
 
+    protected CodeManager _codeManager;
+
+    public void Init(CodeManager codeManager)
+    {
+        _codeManager = codeManager;
+    }
+
     public abstract IEnumerator Execute();
 }

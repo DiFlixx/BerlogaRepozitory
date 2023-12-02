@@ -22,11 +22,14 @@ public class CodePanel : MonoBehaviour
     [SerializeField]
     private Button _button;
 
+    private CodeManager _codeManager;
     private Coroutine _codeCoroutine;
     private List<Func<IEnumerator>> _actions;
 
     private void Awake()
     {
+        GameObject obj = new GameObject(this.GetType().Name);
+        _codeManager = obj.AddComponent<CodeManager>();
         _actions = new List<Func<IEnumerator>>();
     }
 
@@ -54,13 +57,15 @@ public class CodePanel : MonoBehaviour
     }
 
     private IEnumerator Execute()
-    {
+    { 
         gameObject.SetActive(false);
         while (true)
         {
             foreach (var action in _actions)
             {
-                yield return StartCoroutine(action.Invoke());
+                Debug.Log("dsadawd");
+                yield return _codeManager.StartCoroutine(action());
+                yield return new WaitForSeconds(0.3f);
             }
             
         }
@@ -69,26 +74,30 @@ public class CodePanel : MonoBehaviour
     private void Compile()
     {
         _actions.Clear();
-        foreach(Transform child in CommandsContent)
+        foreach(Transform child in CodeContent)
         {
+            CommandView commandView = child.GetComponent<CommandView>();
+            commandView.InitCommand();
             if (child.CompareTag("TriggerView"))
             {
-                var trigger = child.GetComponent<CommandView>().Command as Trigger;
+                var trigger = commandView.Command as Trigger;
                 trigger.Commands.Clear();
                 foreach (Transform triggerChild in child)
                 {
                     if (triggerChild.CompareTag("CommandView"))
                     {
-                        trigger.Commands.Add(triggerChild.GetComponent<CommandView>().Command);
+                        commandView = triggerChild.GetComponent<CommandView>();
+                        commandView.InitCommand();
+                        trigger.Commands.Add(commandView.Command);
                     }
                 }
             }
             else if (child.CompareTag("CommandView"))
             {
-                _actions.Add(child.GetComponent<CommandView>().Command.Execute);
+                _actions.Add(commandView.Command.Execute);
             }
         }
-        _codeCoroutine = StartCoroutine(Execute());
+        _codeCoroutine = _codeManager.StartCoroutine(Execute());
     }
 
     public void ToggleHints(bool value)
@@ -98,7 +107,6 @@ public class CodePanel : MonoBehaviour
 
     public void HandleDrop(GameObject gameObject, GameObject dropObject)
     {
-        Debug.Log(dropObject);
         if (dropObject == _removeHint || dropObject == null)
         {
             Destroy(gameObject);

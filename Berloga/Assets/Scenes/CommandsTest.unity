@@ -675,8 +675,8 @@ MonoBehaviour:
   DayTimeChanged:
     m_PersistentCalls:
       m_Calls: []
-  _fullDayLen: 720
-  _startTime: 1
+  _fullDayLen: 30
+  _startTime: 0
 --- !u!4 &386252997
 Transform:
   m_ObjectHideFlags: 0
@@ -1067,7 +1067,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc4977dd06aa1684f81eb6d5a0fb7516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _commandView: {fileID: 6795326905915914630, guid: b8ea2d4436580b449ac1c7aad37eb7ea, type: 3}
+  _commandView: {fileID: 6345651219717944713, guid: b8ea2d4436580b449ac1c7aad37eb7ea, type: 3}
   _commandName: TimeChanged
 --- !u!1 &1547301352
 GameObject:

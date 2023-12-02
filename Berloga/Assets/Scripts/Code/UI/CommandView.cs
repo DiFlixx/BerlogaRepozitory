@@ -17,10 +17,15 @@ public class CommandView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     private CommandView _cloneObj;
     private CodePanel _codePanel;
 
+    public virtual void InitCommand() { }
+
+    protected virtual void OnAwake() { }
+
     private void Awake()
     {
         RectTransform = GetComponent<RectTransform>();
         Image = GetComponent<Image>();
+        OnAwake();
     }
 
     public void OnBeginDrag(PointerEventData eventData)

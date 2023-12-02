@@ -35,4 +35,5 @@ public class DaytimeTrigger : Trigger
             yield return StartCoroutine(command.Execute());
         }
     }
+
 }
