@@ -20,8 +20,12 @@ public class PlayerController : MonoBehaviour
     private bool isJumping;
     private Transform _playerTransform;
 
+    private int _extraJumps;
+    public int extraJumpsValue;
+    
     void Start()
     {
+        _extraJumps = extraJumpsValue;
         rb = GetComponent<Rigidbody2D>();
         _playerTransform = GetComponent<Transform>();
     }
@@ -32,6 +36,25 @@ public class PlayerController : MonoBehaviour
         Jump();
         CameraMove();
         Flip();
+        DoubleJump();
+    }
+
+    void DoubleJump()
+    {
+        if (isGrounded)
+        {
+            _extraJumps = extraJumpsValue;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Space) && _extraJumps > 0)
+        {
+            rb.velocity = Vector2.up * _jumpForce;
+            _extraJumps--;
+        }
+        else if (Input.GetKeyDown(KeyCode.Space) && _extraJumps == 0 && isGrounded)
+        {
+            rb.velocity = Vector2.up * _jumpForce;
+        }
     }
 
     private void Move()
