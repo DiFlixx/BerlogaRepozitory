@@ -59,16 +59,15 @@ public class CodePanel : MonoBehaviour
     private IEnumerator Execute()
     { 
         gameObject.SetActive(false);
-        while (true)
-        {
+        //ile (true)
+        //
             foreach (var action in _actions)
             {
                 Debug.Log("dsadawd");
                 yield return _codeManager.StartCoroutine(action());
                 yield return new WaitForSeconds(0.3f);
             }
-            
-        }
+        //
     }
 
     private void Compile()

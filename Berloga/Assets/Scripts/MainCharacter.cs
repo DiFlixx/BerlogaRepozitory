@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Camera _camera;
 
+    private Animator _animator;
     private Rigidbody2D rb;
     private bool isGrounded;
     private bool isJumping;
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
     
     void Start()
     {
+        _animator = GetComponent<Animator>();
         _extraJumps = extraJumpsValue;
         rb = GetComponent<Rigidbody2D>();
         _playerTransform = GetComponent<Transform>();
@@ -37,6 +39,9 @@ public class PlayerController : MonoBehaviour
         CameraMove();
         Flip();
         DoubleJump();
+
+        float HorizontalMove = Input.GetAxis("Horizontal") * _speed;
+        _animator.SetFloat("HorizontalMove", Mathf.Abs(HorizontalMove));
     }
 
     void DoubleJump()
@@ -70,6 +75,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, _jumpForce);
             isJumping = true;
+
         }
     }
 
