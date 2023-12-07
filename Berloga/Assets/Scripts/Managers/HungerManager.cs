@@ -2,26 +2,31 @@ using UnityEngine;
 
 public class HungerSystem : MonoBehaviour
 {
-    public float maxHunger = 100f;
-    public float currentHunger;
-    public float maxWater = 100f;
-    public float currentWater;
-    public float hungerDecayRate = 1f;
-    public float waterDecayRate = 1f;
+    public int maxHunger = 6;
+    public int currentHunger;
+    public int maxWater = 6;
+    public int currentWater;
+
+    [SerializeField]
+    private int hungerDecayRate = 1;
+    [SerializeField]
+    private int waterDecayRate = 1;
+    [SerializeField]
+    private HungerUI _hungerUI;
 
     void Start()
     {
         currentHunger = maxHunger;
         currentWater = maxWater;
-        InvokeRepeating("DecayHunger", 1f, 1f);
-        InvokeRepeating("DecayWater", 3f, 3f);
+        InvokeRepeating("DecayHunger", 5f, 5f);
+        InvokeRepeating("DecayWater", 5f, 5f);
     }
 
     void Update()
     {
         if (currentHunger <= 0 || currentWater <= 0)
         {
-            Debug.Log("Вы умерли");
+
         }
     }
 
@@ -29,6 +34,7 @@ public class HungerSystem : MonoBehaviour
     {
         currentHunger -= hungerDecayRate;
         currentHunger = Mathf.Clamp(currentHunger, 0, maxHunger);
+        _hungerUI.UpdateHungerUI();
     }
 
     void DecayWater()
@@ -37,16 +43,27 @@ public class HungerSystem : MonoBehaviour
         currentWater = Mathf.Clamp(currentWater, 0, maxWater);
     }
 
-    public void Eat(float amount)
+    public void Eat(int amount)
     {
         currentHunger += amount;
         currentHunger = Mathf.Clamp(currentHunger, 0, maxHunger);
+        _hungerUI.UpdateHungerUI();
     }
 
-    public void Drink(float amount)
+    public void Drink(int amount)
     {
         currentWater += amount;
         currentWater = Mathf.Clamp(currentWater, 0, maxWater);
+    }
+
+    public int GetHunger()
+    {
+        return currentHunger;
+    }
+
+    public int GetWater()
+    {
+        return currentWater;
     }
 }
 

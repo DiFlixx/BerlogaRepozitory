@@ -8,29 +8,24 @@ using UnityEngine.UI;
 
 public class CodePanel : MonoBehaviour
 {
-    public RectTransform CommandsContent => _commandsContent;
-    public RectTransform CodeContent => _codeContent;
-
     [SerializeField]
     private GameObject _removeHint;
     [SerializeField]
     private RectTransform _commandsContent;
     [SerializeField]
-    private RectTransform _codeContent;
+    private RectTransform _triggersContent;
+    [SerializeField]
+    private RectTransform _commandContainer;
+    [SerializeField]
+    private RectTransform _triggerContainer;
     [SerializeField]
     private GameObject _owner;
     [SerializeField]
     private Button _button;
 
-    private CodeManager _codeManager;
-    private Coroutine _codeCoroutine;
-    private List<Func<IEnumerator>> _actions;
-
     private void Awake()
     {
         GameObject obj = new GameObject(this.GetType().Name);
-        _codeManager = obj.AddComponent<CodeManager>();
-        _actions = new List<Func<IEnumerator>>();
     }
 
     void Start()
@@ -38,17 +33,20 @@ public class CodePanel : MonoBehaviour
         var commands = _owner.GetComponents<Command>();
         foreach (var command in commands)
         {
-            CommandView.Create(command.CommandView, this, command, _commandsContent);
+            if (command is Trigger)
+            {
+                CommandView.Create(command.CommandView, this, command, _triggersContent);
+            }
+            else
+            {
+                CommandView.Create(command.CommandView, this, command, _commandsContent);
+            }
         }
     }
 
     private void OnEnable()
     {
         _button?.onClick.AddListener(Compile);
-        if (_codeCoroutine != null)
-        {
-            StopCoroutine(_codeCoroutine);
-        }
     }
 
     private void OnDisable()
@@ -56,47 +54,15 @@ public class CodePanel : MonoBehaviour
         _button?.onClick.RemoveListener(Compile);
     }
 
-    private IEnumerator Execute()
-    { 
-        gameObject.SetActive(false);
-        //ile (true)
-        //
-            foreach (var action in _actions)
-            {
-                Debug.Log("dsadawd");
-                yield return _codeManager.StartCoroutine(action());
-                yield return new WaitForSeconds(0.3f);
-            }
-        //
-    }
-
     private void Compile()
     {
-        _actions.Clear();
-        foreach(Transform child in CodeContent)
+        if (_commandContainer.childCount > 0 && _triggerContainer.childCount > 0)
         {
-            CommandView commandView = child.GetComponent<CommandView>();
-            commandView.InitCommand();
-            if (child.CompareTag("TriggerView"))
-            {
-                var trigger = commandView.Command as Trigger;
-                trigger.Commands.Clear();
-                foreach (Transform triggerChild in child)
-                {
-                    if (triggerChild.CompareTag("CommandView"))
-                    {
-                        commandView = triggerChild.GetComponent<CommandView>();
-                        commandView.InitCommand();
-                        trigger.Commands.Add(commandView.Command);
-                    }
-                }
-            }
-            else if (child.CompareTag("CommandView"))
-            {
-                _actions.Add(commandView.Command.Execute);
-            }
+            Trigger trigger = _triggerContainer.GetChild(0).GetComponent<CommandView>().Command as Trigger;
+            Command command = _commandContainer.GetChild(0).GetComponent<CommandView>().Command;
+            trigger.Command = command;
         }
-        _codeCoroutine = _codeManager.StartCoroutine(Execute());
+        gameObject.SetActive(false);
     }
 
     public void ToggleHints(bool value)
@@ -106,33 +72,30 @@ public class CodePanel : MonoBehaviour
 
     public void HandleDrop(GameObject gameObject, GameObject dropObject)
     {
+        Debug.Log(dropObject.transform.parent + "  " + dropObject.tag);
         if (dropObject == _removeHint || dropObject == null)
         {
             Destroy(gameObject);
         }
-        else if (dropObject.CompareTag("TriggerView"))
+        else
         {
             if (gameObject.CompareTag("TriggerView"))
             {
-                gameObject.transform.SetParent(_codeContent);
+                if (_triggerContainer.childCount > 0)
+                    Destroy(_triggerContainer.GetChild(0).gameObject);
+                gameObject.transform.SetParent(_triggerContainer);
             }
             else
             {
-                gameObject.transform.SetParent(dropObject.transform);
+                if (_commandContainer.childCount > 0)
+                    Destroy(_commandContainer.GetChild(0).gameObject);
+                gameObject.transform.SetParent(_commandContainer);
             }
-        }
-        else if (dropObject.CompareTag("CommandView") && dropObject.transform.parent.CompareTag("TriggerView"))
-        {
-            gameObject.transform.SetParent(dropObject.transform.parent);
-        }
-        else
-        {
-            gameObject.transform.SetParent(_codeContent);
         }
     }
 
     public void UpdateUI()
     {
-        LayoutRebuilder.ForceRebuildLayoutImmediate(_codeContent);
+        //LayoutRebuilder.ForceRebuildLayoutImmediate(_codeContent);
     }
 }

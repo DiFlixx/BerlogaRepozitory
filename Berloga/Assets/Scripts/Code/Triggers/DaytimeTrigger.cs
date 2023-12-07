@@ -27,13 +27,4 @@ public class DaytimeTrigger : Trigger
     {
         if (daytime == DayTime) Execute();
     }
-
-    public override IEnumerator Execute()
-    {
-        foreach(var command in Commands)
-        {
-            yield return StartCoroutine(command.Execute());
-        }
-    }
-
 }

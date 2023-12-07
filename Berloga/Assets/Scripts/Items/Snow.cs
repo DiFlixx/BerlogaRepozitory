@@ -2,13 +2,16 @@ using UnityEngine;
 
 public class Snow : MonoBehaviour
 {
-    public float waterRestoreAmount = 10f;
-    public float cooldownTime = 5f;
-    public Color highlightColor = Color.yellow;
+    [SerializeField]
+    private int waterRestoreAmount = 10;
+    [SerializeField]
+    private float cooldownTime = 5f;
+    [SerializeField]
+    private Color highlightColor = Color.yellow;
 
 
-    private Color originalColor;
-    private Renderer renderer;
+    private Color _originalColor;
+    private Renderer _renderer;
 
 
     [SerializeField]
@@ -18,8 +21,8 @@ public class Snow : MonoBehaviour
 
     private void Start()
     {
-        renderer = GetComponent<Renderer>();
-        originalColor = renderer.material.color;
+        _renderer = GetComponent<Renderer>();
+        _originalColor = _renderer.material.color;
     }
 
     void Update()
@@ -56,13 +59,13 @@ public class Snow : MonoBehaviour
 
     void OnMouseEnter()
     {
-        renderer.material.color = highlightColor;
+        _renderer.material.color = highlightColor;
         isMouse = true;
     }
 
     void OnMouseExit()
     {
-        renderer.material.color = originalColor;
+        _renderer.material.color = _originalColor;
         isMouse = false;
     }
 }

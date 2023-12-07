@@ -11,9 +11,8 @@ public class TurnOnCommand : Command
         _turnOnAble = GetComponent<ITurnOnable>();
     }
 
-    public override IEnumerator Execute()
+    public override void Execute()
     {
         _turnOnAble.TurnOn();
-        yield return null;
     }
 }
