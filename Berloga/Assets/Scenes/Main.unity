@@ -285,9 +285,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 6
-  _jumpForce: 20
+  _jumpForce: 15
   _smoothness: 7
   _camera: {fileID: 519420031}
+  extraJumpsValue: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
