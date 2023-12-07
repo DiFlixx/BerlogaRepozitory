@@ -1,11 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
-    private float _speed;
+    [SerializeField] private float speed;
     [SerializeField]
     private float _jumpForce;
     [SerializeField]
@@ -21,13 +22,15 @@ public class PlayerController : MonoBehaviour
     //private bool isJumping;
     private Transform _playerTransform;
 
-    private int _extraJumps;
-    public int extraJumpsValue;
+    private int _countUsualJumps;
+    private int _countDoubleJumps;
+    
+    [SerializeField] private AudioSource snowJumpAudio;
+    [SerializeField] private AudioSource doubleJumpAudio;
     
     void Start()
     {
         _animator = GetComponent<Animator>();
-        _extraJumps = extraJumpsValue;
         rb = GetComponent<Rigidbody2D>();
         _playerTransform = GetComponent<Transform>();
     }
@@ -35,30 +38,28 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Move();
-        Jump();
         CameraMove();
         Flip();
         DoubleJump();
 
-        float HorizontalMove = Input.GetAxis("Horizontal") * _speed;
+        float HorizontalMove = Input.GetAxis("Horizontal") * speed;
         _animator.SetFloat("HorizontalMove", Mathf.Abs(HorizontalMove));
     }
 
     void DoubleJump()
     {
-        if (isGrounded)
-        {
-            _extraJumps = extraJumpsValue;
-        }
-        
-        if (Input.GetKeyDown(KeyCode.Space) && _extraJumps > 0)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.velocity = Vector2.up * _jumpForce;
-            _extraJumps--;
+            snowJumpAudio.Play();
+            _countUsualJumps++;
         }
-        else if (Input.GetKeyDown(KeyCode.Space) && _extraJumps == 0 && isGrounded)
+
+        else if (Input.GetKeyDown(KeyCode.Space) && _countUsualJumps == 1 && !isGrounded)
         {
             rb.velocity = Vector2.up * _jumpForce;
+            doubleJumpAudio.Play();
+            _countUsualJumps++;
         }
     }
 
@@ -66,17 +67,7 @@ public class PlayerController : MonoBehaviour
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         Vector2 movement = new Vector2(horizontalInput, 0);
-        rb.velocity = new Vector2(movement.x * _speed, rb.velocity.y);
-    }
-
-    void Jump()
-    {
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, _jumpForce);
-            //isJumping = true;
-
-        }
+        rb.velocity = new Vector2(movement.x * speed, rb.velocity.y);
     }
 
     private void CameraMove()
