@@ -51,7 +51,8 @@ public class CommandView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         var view = Instantiate(obj, parent);
         view._codePanel = codePanel;
         view.Command = command;
-        view._commandText.text = command.CommandName;
+        if (view._commandText != null)
+            view._commandText.text = command.CommandName;
         return view;
     }
 

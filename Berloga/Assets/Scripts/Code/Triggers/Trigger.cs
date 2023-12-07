@@ -4,16 +4,20 @@ using UnityEngine;
 
 public abstract class Trigger : Command
 {
-    public List<Command> Commands { get; private set; }
+    public Command Command { get; set; }
 
     private void Awake()
     {
-        Commands = new List<Command>();
         OnAwake();
     }
 
     protected virtual void OnAwake()
     {
 
+    }
+
+    public override void Execute()
+    {
+        Command?.Execute();
     }
 }

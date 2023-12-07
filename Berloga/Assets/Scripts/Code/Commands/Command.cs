@@ -19,5 +19,5 @@ public abstract class Command : MonoBehaviour
         _codeManager = codeManager;
     }
 
-    public abstract IEnumerator Execute();
+    public abstract void Execute();
 }
