@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
     private Rigidbody2D rb;
     private bool isGrounded;
-    private bool isJumping;
+    //private bool isJumping;
     private Transform _playerTransform;
 
     private int _extraJumps;
@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, _jumpForce);
-            isJumping = true;
+            //isJumping = true;
 
         }
     }
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
         if (collision.collider.tag == "Ground")
         {
             isGrounded = true;
-            isJumping = false;
+            //isJumping = false;
         }
     }
 

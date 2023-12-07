@@ -32,7 +32,6 @@ public class TimeManager : MonoBehaviour
         time += Time.deltaTime;
         if (time > _dayPartTime) 
         {
-            Debug.Log(_currentDayTime);
             time = 0;
             _currentDayTime = (_currentDayTime + 1)%(int)DayTime.Size;
             DayTimeChanged?.Invoke(GetDayTime());
