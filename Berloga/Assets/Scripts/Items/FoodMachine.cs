@@ -1,26 +1,27 @@
 using UnityEngine;
 
-public class FoodMachine : MonoBehaviour
+public class FoodMachine : Item, ITurnOffable, ITurnOnable, ICanGiveFood
 {
     [SerializeField]
-    private int foodRestoreAmount = 10;
-    [SerializeField]
     private float cooldownTime = 5f;
+
+    [SerializeField]
+    private CodePanel _codePanel;
     [SerializeField]
     private Color highlightColor = Color.yellow;
-
-
-    private Color _originalColor;
-    private Renderer _renderer;
-
-
     [SerializeField]
-    private HungerSystem _hungerSystem;
-    private bool canActivate = true;
-    private bool isMouse = false;
+    private GameObject _food;
+    [SerializeField]
+    private Sprite _turnedOff;
+    [SerializeField]
+    private Sprite _turnedOn;
+
+    private bool _isOn;
+    private SpriteRenderer _spriteRenderer;
 
     private void Start()
     {
+        _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         _renderer = GetComponent<Renderer>();
         _originalColor = _renderer.material.color;
     }
@@ -29,21 +30,25 @@ public class FoodMachine : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && canActivate && isMouse)
         {
-            ActivateMachine();
+            ActivatePanel();
         }
     }
 
-    void ActivateMachine()
+    private void ActivatePanel()
     {
-        RestoreFood();
-
-        StartCooldown();
+        _codePanel.gameObject.SetActive(true);
     }
 
-    void RestoreFood()
+    void OnMouseEnter()
     {
-        _hungerSystem.Eat(foodRestoreAmount);
-        Debug.Log("Еда восстановлена: " + foodRestoreAmount);
+        _renderer.material.color = highlightColor;
+        isMouse = true;
+    }
+
+    void OnMouseExit()
+    {
+        _renderer.material.color = _originalColor;
+        isMouse = false;
     }
 
     void StartCooldown()
@@ -57,16 +62,24 @@ public class FoodMachine : MonoBehaviour
         canActivate = true;
     }
 
-    void OnMouseEnter()
+    public void TurnOff()
     {
-        _renderer.material.color = highlightColor;
-        isMouse = true;
+        _spriteRenderer.sprite = _turnedOff;
+        _isOn = false;
     }
 
-    void OnMouseExit()
+    public void TurnOn()
     {
-        _renderer.material.color = _originalColor;
-        isMouse = false;
+        _spriteRenderer.sprite = _turnedOn;
+        _isOn = true;
+    }
+
+    public void GiveFood()
+    {
+        if (_isOn)
+        {
+            Instantiate(_food, transform).transform.position = transform.position;
+        }
     }
 }
 
