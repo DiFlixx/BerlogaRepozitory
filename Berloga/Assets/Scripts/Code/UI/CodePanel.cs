@@ -22,6 +22,8 @@ public class CodePanel : MonoBehaviour
     private GameObject _owner;
     [SerializeField]
     private Button _button;
+    [SerializeField]
+    private Image _icon;
 
     private void Awake()
     {
@@ -30,6 +32,7 @@ public class CodePanel : MonoBehaviour
 
     void Start()
     {
+        _icon.sprite = _owner.GetComponentInChildren<SpriteRenderer>().sprite;
         var commands = _owner.GetComponents<Command>();
         foreach (var command in commands)
         {
@@ -72,7 +75,6 @@ public class CodePanel : MonoBehaviour
 
     public void HandleDrop(GameObject gameObject, GameObject dropObject)
     {
-        Debug.Log(dropObject.transform.parent + "  " + dropObject.tag);
         if (dropObject == _removeHint || dropObject == null)
         {
             Destroy(gameObject);
