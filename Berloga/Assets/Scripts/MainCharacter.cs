@@ -7,12 +7,12 @@ using UnityEngine.Serialization;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed;
+    
     [SerializeField]
     private float _jumpForce;
     [SerializeField]
     private float _smoothness;
-
-
+    
     [SerializeField]
     private Camera _camera;
 
@@ -21,9 +21,6 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     //private bool isJumping;
     private Transform _playerTransform;
-
-    private int _countUsualJumps;
-    private int _countDoubleJumps;
     
     [SerializeField] private AudioSource snowJumpAudio;
     [SerializeField] private AudioSource doubleJumpAudio;
@@ -40,26 +37,18 @@ public class PlayerController : MonoBehaviour
         Move();
         CameraMove();
         Flip();
-        DoubleJump();
+        Jump();
 
         float HorizontalMove = Input.GetAxis("Horizontal") * speed;
         _animator.SetFloat("HorizontalMove", Mathf.Abs(HorizontalMove));
     }
 
-    void DoubleJump()
+    void Jump()
     {
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.velocity = Vector2.up * _jumpForce;
             snowJumpAudio.Play();
-            _countUsualJumps++;
-        }
-
-        else if (Input.GetKeyDown(KeyCode.Space) && _countUsualJumps == 1 && !isGrounded)
-        {
-            rb.velocity = Vector2.up * _jumpForce;
-            doubleJumpAudio.Play();
-            _countUsualJumps++;
         }
     }
 
