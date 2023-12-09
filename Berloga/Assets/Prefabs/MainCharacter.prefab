@@ -164,11 +164,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5a398480d841834e86076e1af62e6bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 6
+  speed: 0
   _jumpForce: 20
   _smoothness: 7
   _camera: {fileID: 0}
   extraJumpsValue: 111
+  snowJumpAudio: {fileID: 0}
+  doubleJumpAudio: {fileID: 0}
 --- !u!95 &2088627773463244339
 Animator:
   serializedVersion: 5
