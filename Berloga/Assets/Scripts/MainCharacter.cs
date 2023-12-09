@@ -21,12 +21,17 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     //private bool isJumping;
     private Transform _playerTransform;
+    private TemperatureManager _temperatureManager;
+
+    private int _extraJumps;
+    public int extraJumpsValue;
     
     [SerializeField] private AudioSource snowJumpAudio;
     [SerializeField] private AudioSource doubleJumpAudio;
     
     void Start()
     {
+        _temperatureManager = FindAnyObjectByType<TemperatureManager>();
         _animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         _playerTransform = GetComponent<Transform>();
@@ -59,6 +64,11 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(movement.x * speed, rb.velocity.y);
     }
 
+    public void SuperJump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, _jumpForce * 2);
+    }
+
     private void CameraMove()
     {
         Vector3 targetPosition = new Vector3(_playerTransform.position.x, _playerTransform.position.y, _camera.transform.position.z);
@@ -82,7 +92,7 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == "Ground")
+        if (collision.transform.CompareTag("Ground"))
         {
             isGrounded = true;
             //isJumping = false;
@@ -91,9 +101,25 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.collider.tag == "Ground")
+        if (collision.transform.CompareTag("Ground"))
         {
             isGrounded = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("HeatArea"))
+        {
+            _temperatureManager.temperatureDecayRate = -3;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("HeatArea"))
+        {
+            _temperatureManager.temperatureDecayRate = 1;
         }
     }
 }
