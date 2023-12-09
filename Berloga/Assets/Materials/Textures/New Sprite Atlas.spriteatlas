@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: New Sprite Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 8abbc23b3d067ae4a97576a658ec4300, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - 8abbc23b3d067ae4a97576a658ec4300: -286998364
+    - 8abbc23b3d067ae4a97576a658ec4300: -1489898604
+    - 8abbc23b3d067ae4a97576a658ec4300: 904766055
+    - 8abbc23b3d067ae4a97576a658ec4300: -1096656042
+    - 8abbc23b3d067ae4a97576a658ec4300: -400910968
+    - 8abbc23b3d067ae4a97576a658ec4300: 882230008
+    - 8abbc23b3d067ae4a97576a658ec4300: -434935524
+    - 8abbc23b3d067ae4a97576a658ec4300: -702168182
+    - 8abbc23b3d067ae4a97576a658ec4300: 1909375723
+    - 8abbc23b3d067ae4a97576a658ec4300: -886770957
+    - 8abbc23b3d067ae4a97576a658ec4300: -1195380965
+    - 8abbc23b3d067ae4a97576a658ec4300: -572838938
+    - 8abbc23b3d067ae4a97576a658ec4300: 14515241
+    - 8abbc23b3d067ae4a97576a658ec4300: 645625721
+    - 8abbc23b3d067ae4a97576a658ec4300: 644697696
+    - 8abbc23b3d067ae4a97576a658ec4300: 635999064
+    - 8abbc23b3d067ae4a97576a658ec4300: 993481124
+    - 8abbc23b3d067ae4a97576a658ec4300: 1866935228
+    - 8abbc23b3d067ae4a97576a658ec4300: 260722083
+    - 8abbc23b3d067ae4a97576a658ec4300: 1155383294
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: -286998364, guid: 8abbc23b3d067ae4a97576a658ec4300, type: 3}
+  - {fileID: -1489898604, guid: 8abbc23b3d067ae4a97576a658ec4300, type: 3}
+  - {fileID: 904766055, guid: 8abbc23b3d067ae4a97576a658ec4300, type: 3}
+  - {fileID: -1096656042, guid: 8abbc23b3d067ae4a97576a658ec4300, type: 3}
+  - {fileID: -400910968, guid: 8abbc23b3d067ae4a97576a658ec4300, type: 3}
+  - {fileID: 882230008, guid: 8abbc23b3d067ae4a97576a658ec4300, type: 3}
+  - {fileID: -434935524, guid: 8abbc23b3d067ae4a97576a658ec4300, type: 3}
+  - {fileID: -702168182, guid: 8abbc23b3d067ae4a97576a658ec4300, type: 3}
+  - {fileID: 1909375723, guid: 8abbc23b3d067ae4a97576a658ec4300, type: 3}
+  - {fileID: -886770957, guid: 8abbc23b3d067ae4a97576a658ec4300, type: 3}
+  - {fileID: -1195380965, guid: 8abbc23b3d067ae4a97576a658ec4300, type: 3}
+  - {fileID: -572838938, guid: 8abbc23b3d067ae4a97576a658ec4300, type: 3}
+  - {fileID: 14515241, guid: 8abbc23b3d067ae4a97576a658ec4300, type: 3}
+  - {fileID: 645625721, guid: 8abbc23b3d067ae4a97576a658ec4300, type: 3}
+  - {fileID: 644697696, guid: 8abbc23b3d067ae4a97576a658ec4300, type: 3}
+  - {fileID: 635999064, guid: 8abbc23b3d067ae4a97576a658ec4300, type: 3}
+  - {fileID: 993481124, guid: 8abbc23b3d067ae4a97576a658ec4300, type: 3}
+  - {fileID: 1866935228, guid: 8abbc23b3d067ae4a97576a658ec4300, type: 3}
+  - {fileID: 260722083, guid: 8abbc23b3d067ae4a97576a658ec4300, type: 3}
+  - {fileID: 1155383294, guid: 8abbc23b3d067ae4a97576a658ec4300, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Sprite-0012_(0)_9
+  - Sprite-0012_(0)_8
+  - Sprite-0012_(0)_18
+  - Sprite-0012_(0)_19
+  - Sprite-0012_(0)_14
+  - Sprite-0012_(0)_15
+  - Sprite-0012_(0)_16
+  - Sprite-0012_(0)_17
+  - Sprite-0012_(0)_10
+  - Sprite-0012_(0)_11
+  - Sprite-0012_(0)_12
+  - Sprite-0012_(0)_13
+  - Sprite-0012_(0)_5
+  - Sprite-0012_(0)_4
+  - Sprite-0012_(0)_7
+  - Sprite-0012_(0)_6
+  - Sprite-0012_(0)_1
+  - Sprite-0012_(0)_0
+  - Sprite-0012_(0)_3
+  - Sprite-0012_(0)_2
+  m_RenderDataMap: {}
+  m_Tag: New Sprite Atlas
+  m_IsVariant: 0

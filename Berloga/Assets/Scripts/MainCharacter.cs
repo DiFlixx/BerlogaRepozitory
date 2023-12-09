@@ -50,10 +50,12 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        var hit = Physics2D.BoxCast(transform.position, new Vector3(0.6f, 3, 0), 0, Vector2.down, 0.3f, LayerMask.GetMask("Ground"));
+        Debug.Log(hit.collider);
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && hit.collider != null)
         {
             rb.velocity = Vector2.up * _jumpForce;
-            snowJumpAudio.Play();
+            //snowJumpAudio.Play();
         }
     }
 
@@ -95,7 +97,14 @@ public class PlayerController : MonoBehaviour
         if (collision.transform.CompareTag("Ground"))
         {
             isGrounded = true;
-            //isJumping = false;
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("Ground"))
+        {
+            isGrounded = true;
         }
     }
 
