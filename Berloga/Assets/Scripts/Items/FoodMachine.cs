@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class FoodMachine : Item, ITurnOffable, ITurnOnable, ICanGiveFood
 {
@@ -11,6 +12,8 @@ public class FoodMachine : Item, ITurnOffable, ITurnOnable, ICanGiveFood
     private Sprite _turnedOff;
     [SerializeField]
     private Sprite _turnedOn;
+
+    public UnityEvent OnFoodDropped;
 
     private bool _isOn;
 
@@ -42,6 +45,7 @@ public class FoodMachine : Item, ITurnOffable, ITurnOnable, ICanGiveFood
         if (_isOn)
         {
             Instantiate(_food, transform).transform.position = transform.position;
+            OnFoodDropped?.Invoke();
         }
     }
 }
