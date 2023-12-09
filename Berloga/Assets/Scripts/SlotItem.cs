@@ -10,6 +10,8 @@ public class SlotItem : MonoBehaviour
     private Image _image;
     [SerializeField]
     private Button _button;
+    
+    public GameObject _container;
 
     private Slot _slot;
 

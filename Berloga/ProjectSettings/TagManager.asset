@@ -10,6 +10,7 @@ TagManager:
   - Slot
   - InventoryItem
   - Cross
+  - HeatArea
   layers:
   - Default
   - TransparentFX

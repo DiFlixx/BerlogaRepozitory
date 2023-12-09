@@ -2,57 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Heater : MonoBehaviour, ITurnOffable, ITurnOnable
+public class Heater : Item, ITurnOffable, ITurnOnable
 {
     [SerializeField]
-    private CodePanel _codePanel;
+    private GameObject _heatArea;
     [SerializeField]
-    private Color highlightColor = Color.yellow;
-
-
-    private Color _originalColor;
-    private Renderer _renderer;
-    private bool canActivate = true;
-    private bool isMouse = false;
-
-    private void Start()
-    {
-        _renderer = GetComponent<Renderer>();
-        _originalColor = _renderer.material.color;
-    }
+    private Sprite _turnOffImage;
+    [SerializeField]
+    private Sprite _turnOnImage;
+    
+    private bool _isOn;
+    private Coroutine _coroutine;
 
     public void TurnOff()
     {
-        gameObject.SetActive(false);
+        _isOn = false;
+        _heatArea.SetActive(false);
+        _spriteRenderer.sprite = _turnOffImage;
     }
 
     public void TurnOn()
     {
-        gameObject.SetActive(true);
+        _isOn = true;
+        _spriteRenderer.sprite = _turnOnImage;
+        if (_coroutine == null)
+            _coroutine = StartCoroutine(TurnOffHeat());
     }
 
-    void Update()
+    private IEnumerator TurnOffHeat()
     {
-        if (Input.GetKeyDown(KeyCode.E) && canActivate && isMouse)
+        yield return new WaitForSeconds(20f);
+        TurnOff();
+        _coroutine = null;
+    }
+
+    public void Heat()
+    {
+        if (_isOn) 
         {
-            ActivatePanel();
+            _heatArea.SetActive(true);
         }
-    }
-
-    private void ActivatePanel()
-    {
-        _codePanel.gameObject.SetActive(true);
-    }
-
-    void OnMouseEnter()
-    {
-        _renderer.material.color = highlightColor;
-        isMouse = true;
-    }
-
-    void OnMouseExit()
-    {
-        _renderer.material.color = _originalColor;
-        isMouse = false;
     }
 }
