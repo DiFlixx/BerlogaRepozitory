@@ -14,8 +14,13 @@ public class RobotHelper : Item
     private float _speed;
     [SerializeField]
     private PlayerController _controller;
+    [SerializeField]
+    private Inventory _inventory;
+    [SerializeField]
+    private float _distance;
     private States _state;
     private GameObject _currentTarget;
+
 
     public void FindFood()
     {
@@ -50,10 +55,23 @@ public class RobotHelper : Item
         {
             _currentTarget = _controller.gameObject;
         }
+        if (Vector3.Distance(transform.position, _controller.transform.position) > _distance)
+        {
+            _inventory.gameObject.SetActive(false);
+        }
+        else
+        {
+            _inventory.gameObject.SetActive(true);
+        }
     }
 
     private void Awake()
     {
         _state = States.Follow; _currentTarget = _controller.gameObject;
+    }
+
+    public void FoodPicked()
+    {
+
     }
 }

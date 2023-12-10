@@ -18,7 +18,7 @@ public abstract class Pickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("RobotHelper"))
         {
             for (int i = 0; i < _inventory.slots.Length; i++)
             {
