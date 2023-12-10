@@ -25,16 +25,16 @@ public class Heater : Item, ITurnOffable, ITurnOnable
     {
         _isOn = true;
         _spriteRenderer.sprite = _turnOnImage;
-        if (_coroutine == null)
-            _coroutine = StartCoroutine(TurnOffHeat());
+        /*if (_coroutine == null)
+            _coroutine = StartCoroutine(TurnOffHeat());*/
     }
 
-    private IEnumerator TurnOffHeat()
+    /*private IEnumerator TurnOffHeat()
     {
         yield return new WaitForSeconds(20f);
         TurnOff();
         _coroutine = null;
-    }
+    }*/
 
     public void Heat()
     {

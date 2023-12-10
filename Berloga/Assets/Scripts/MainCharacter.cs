@@ -44,21 +44,13 @@ public class PlayerController : MonoBehaviour
     {
         float HorizontalMove = Input.GetAxis("Horizontal") * speed;
         float verticalInput = Input.GetAxis("Vertical");
-
-        if (_isOnLadder)
-        {
-            ClimbLadder(verticalInput);
-        }
-        else
-        {
-            float VerticalMove = rb.velocity.y;
-            _animator.SetFloat("HorizontalMove", Mathf.Abs(HorizontalMove));
-            _animator.SetFloat("VerticalMove", VerticalMove);
-            Move();
-            CameraMove();
-            Flip();
-            Jump();
-        }
+        float VerticalMove = rb.velocity.y;
+        _animator.SetFloat("HorizontalMove", Mathf.Abs(HorizontalMove));
+        _animator.SetFloat("VerticalMove", VerticalMove);
+        Move();
+        CameraMove();
+        Flip();
+        Jump();
     }
 
     void Jump()
@@ -80,7 +72,7 @@ public class PlayerController : MonoBehaviour
 
     public void SuperJump()
     {
-        rb.velocity = new Vector2(rb.velocity.x, _jumpForce * 2);
+        rb.velocity = new Vector2(rb.velocity.x, _jumpForce * 1.3f);
     }
 
     private void CameraMove()
@@ -133,27 +125,10 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("HeatArea"))
         {
+            Debug.Log("SDCVFsdaf");
             _temperatureManager.temperatureDecayRate = -3;
         }
         
-    }
-
-    void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.CompareTag("LadderTrigger"))
-        {
-            if (Input.GetKey(KeyCode.W))
-            {
-                Debug.Log("W key pressed");
-                _isOnLadder = true;
-                rb.gravityScale = 0;
-            }
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                _isOnLadder = false;
-                rb.gravityScale = 5;
-            }
-        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -162,16 +137,5 @@ public class PlayerController : MonoBehaviour
         {
             _temperatureManager.temperatureDecayRate = 1;
         }
-        if (collision.CompareTag("LadderTrigger"))
-        {
-            _isOnLadder = false;
-            rb.gravityScale = 5;
-        }
-    }
-
-    void ClimbLadder(float verticalInput)
-    {
-        Vector2 climbVelocity = new Vector2(rb.velocity.x, verticalInput * climbSpeed);
-        rb.velocity = climbVelocity;
     }
 }

@@ -12,7 +12,7 @@ public class Spring : Item, ITurnOffable, ITurnOnable
     private bool _isOn;
     public void TurnOff()
     {
-        transform.position = _startPosition - new Vector3(0, 0.3f, 0);
+        transform.position = _startPosition - new Vector3(0, 0.2f, 0);
         _isOn = false;
     }
 

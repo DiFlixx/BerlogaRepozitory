@@ -15,7 +15,7 @@ public class RobotHelper : Item
     [SerializeField]
     private float _speed;
     [SerializeField]
-    private PlayerController _controller;
+    private GameObject _controller;
     [SerializeField]
     private GameObject _inventoryUI;
     [SerializeField]
@@ -26,6 +26,9 @@ public class RobotHelper : Item
     private GameObject _currentTarget;
     private Stack<GameObject> _stack;
     private bool _foodFound;
+    private Rigidbody2D _rb;
+    private SpriteRenderer _spriteRenderer;
+    private Vector2 previousPosition;
 
     public void FindFood()
     {
@@ -87,14 +90,24 @@ public class RobotHelper : Item
         {
             _inventoryUI.gameObject.SetActive(true);
         }
+        Vector2 currentPosition = _rb.position;
+        Vector2 movement = currentPosition - previousPosition;
+        float speedX = movement.x / Time.deltaTime;
+        previousPosition = currentPosition;
+        if ((speedX > 0 && !_spriteRenderer.flipX) || (speedX < 0 && _spriteRenderer.flipX))
+        {
+            Flip();
+        }
         if (_currentTarget != null)
-        transform.position = Vector3.Lerp(transform.position, _currentTarget.transform.position, Time.deltaTime * _speed);
+            transform.position = Vector3.Lerp(transform.position, _currentTarget.transform.position, Time.deltaTime * _speed);
     }
 
     private void Awake()
     {
         _state = States.Follow; _currentTarget = _controller.gameObject;
         _stack = new Stack<GameObject>();
+        _rb = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void FoodPicked()
@@ -117,5 +130,10 @@ public class RobotHelper : Item
             }
         }
         return full;
+    }
+
+    void Flip()
+    {
+        _spriteRenderer.flipX = !_spriteRenderer.flipX;
     }
 }
