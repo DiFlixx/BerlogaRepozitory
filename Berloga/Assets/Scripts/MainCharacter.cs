@@ -8,8 +8,6 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed;
 
-    [SerializeField] private float climbSpeed;
-
     [SerializeField]
     private float _jumpForce;
     [SerializeField]
@@ -25,12 +23,7 @@ public class PlayerController : MonoBehaviour
     private Transform _playerTransform;
     private TemperatureManager _temperatureManager;
 
-    private int _extraJumps;
-    public int extraJumpsValue;
-    private bool _isOnLadder;
-
     [SerializeField] private AudioSource snowJumpAudio;
-    [SerializeField] private AudioSource doubleJumpAudio;
 
     void Start()
     {
@@ -59,7 +52,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && hit.collider != null)
         {
             rb.velocity = Vector2.up * _jumpForce;
-            //snowJumpAudio.Play();
+            snowJumpAudio.Play();
         }
     }
 

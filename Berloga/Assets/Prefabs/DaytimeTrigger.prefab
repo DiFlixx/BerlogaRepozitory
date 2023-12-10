@@ -1212,7 +1212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8414366235251489190, guid: fae15bdc5994cd847acf707e69b5bb44, type: 3}
       propertyPath: m_Name
-      value: Daytimetrigger
+      value: DaytimeTrigger
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2777275366860303438, guid: fae15bdc5994cd847acf707e69b5bb44, type: 3}
