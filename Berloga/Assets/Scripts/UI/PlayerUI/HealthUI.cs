@@ -20,7 +20,6 @@ public class HealthBar : MonoBehaviour
     {
         int health = healthManager.GetHealth();
 
-        Debug.Log(health);
 
         for (int i = 0; i < hearts.Length; i++)
         {

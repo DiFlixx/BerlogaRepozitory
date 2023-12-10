@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Spring : Item, ITurnOffable, ITurnOnable
 {
-    [SerializeField]
     private PlayerController _controller;
 
     private Vector3 _startPosition;
@@ -32,6 +31,7 @@ public class Spring : Item, ITurnOffable, ITurnOnable
 
     private void Awake()
     {
+        _controller = FindObjectOfType<PlayerController>();
         _startPosition = transform.position;
         TurnOff();
     }

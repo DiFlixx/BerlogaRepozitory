@@ -16,7 +16,7 @@ public class TemperatureManager : MonoBehaviour
     void Start()
     {
         currentTemperature = maxTemperature;
-        InvokeRepeating("DecayTemperature", 1f, 1f);
+        InvokeRepeating("DecayTemperature", 2f, 2f);
     }
 
     void DecayTemperature()

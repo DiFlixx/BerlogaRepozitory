@@ -14,7 +14,6 @@ public class StickButton : MonoBehaviour
 
     public void Create()
     {
-        Debug.Log(target.name + " " + controller.name);
-        Instantiate(target.gameObject, controller.transform.parent, false).transform.position = controller.transform.position - new Vector3(0, 0.6f, 0);
+        Instantiate(target.gameObject, controller.transform.position - new Vector3(0, 0.6f, 0), Quaternion.identity);
     }
 }
