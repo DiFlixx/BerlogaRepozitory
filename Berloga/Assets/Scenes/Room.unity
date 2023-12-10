@@ -258,7 +258,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 376301088}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -669,7 +669,7 @@ PrefabInstance:
     - target: {fileID: 4832931653447281434, guid: 5afa70febee157340889996bca132463, type: 3}
       propertyPath: _camera
       value: 
-      objectReference: {fileID: 1023844619}
+      objectReference: {fileID: 0}
     - target: {fileID: 4832931653447281434, guid: 5afa70febee157340889996bca132463, type: 3}
       propertyPath: _jumpForce
       value: 15
