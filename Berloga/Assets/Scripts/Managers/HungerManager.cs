@@ -15,7 +15,7 @@ public class HungerSystem : MonoBehaviour
     void Start()
     {
         currentHunger = maxHunger;
-        InvokeRepeating("DecayHunger", 5f, 5f);
+        InvokeRepeating("DecayHunger", 20f, 20f);
     }
 
     void Update()
