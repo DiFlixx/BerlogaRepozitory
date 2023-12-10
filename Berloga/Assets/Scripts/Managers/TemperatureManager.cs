@@ -7,6 +7,8 @@ public class TemperatureManager : MonoBehaviour
     public int maxTemperature = 70;
     public int currentTemperature;
     public int temperatureDecayRate = 1;
+    [SerializeField]
+    private HealthManager _healthManager;
 
     [SerializeField]
     private TemperatureUI _temperatureUI;
@@ -17,19 +19,15 @@ public class TemperatureManager : MonoBehaviour
         InvokeRepeating("DecayTemperature", 1f, 1f);
     }
 
-    void Update()
-    {
-        if (currentTemperature <= 0)
-        {
-            // Обработка ситуации, когда температура достигла нуля
-        }
-    }
-
     void DecayTemperature()
     {
         currentTemperature -= temperatureDecayRate;
         currentTemperature = Mathf.Clamp(currentTemperature, 0, maxTemperature);
         _temperatureUI.UpdateTemperatureUI();
+        if (currentTemperature <= 0)
+        {
+            _healthManager.TakeDamage(1);
+        }
     }
 
     public int GetTemperature()

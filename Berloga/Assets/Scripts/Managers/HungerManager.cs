@@ -9,6 +9,8 @@ public class HungerSystem : MonoBehaviour
     private int hungerDecayRate = 1;
     [SerializeField]
     private HungerUI _hungerUI;
+    [SerializeField]
+    private HealthManager _healthManager;
 
     void Start()
     {
@@ -29,6 +31,11 @@ public class HungerSystem : MonoBehaviour
         currentHunger -= hungerDecayRate;
         currentHunger = Mathf.Clamp(currentHunger, 0, maxHunger);
         _hungerUI.UpdateHungerUI();
+
+        if (currentHunger <= 0)
+        {
+            _healthManager.TakeDamage(1);
+        }
     }
 
     public void Eat(int amount)

@@ -16,9 +16,11 @@ public class HealthBar : MonoBehaviour
     [SerializeField]
     private Sprite emptyHeartSprite;
 
-    void UpdateHealthUI()
+    public void UpdateHealthUI()
     {
         int health = healthManager.GetHealth();
+
+        Debug.Log(health);
 
         for (int i = 0; i < hearts.Length; i++)
         {

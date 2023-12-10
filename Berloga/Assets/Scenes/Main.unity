@@ -19066,6 +19066,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6479162840165147280, guid: 5eda508dca809fd4db9ed5052bcad3e9, type: 3}
+      propertyPath: _healthManager
+      value: 
+      objectReference: {fileID: 456175260}
+    - target: {fileID: 6479162840165147280, guid: 5eda508dca809fd4db9ed5052bcad3e9, type: 3}
       propertyPath: _temperatureUI
       value: 
       objectReference: {fileID: 324329788}
@@ -19073,6 +19077,10 @@ PrefabInstance:
       propertyPath: _hungerUI
       value: 
       objectReference: {fileID: 556831290}
+    - target: {fileID: 7829469742313215839, guid: 5eda508dca809fd4db9ed5052bcad3e9, type: 3}
+      propertyPath: _healthManager
+      value: 
+      objectReference: {fileID: 456175260}
     - target: {fileID: 8178781159638134984, guid: 5eda508dca809fd4db9ed5052bcad3e9, type: 3}
       propertyPath: m_Name
       value: Managers
