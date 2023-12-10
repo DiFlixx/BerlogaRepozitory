@@ -125,7 +125,6 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("HeatArea"))
         {
-            Debug.Log("SDCVFsdaf");
             _temperatureManager.temperatureDecayRate = -3;
         }
         
