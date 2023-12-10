@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
     private Rigidbody2D rb;
     private bool isGrounded;
-    //private bool isJumping;
     private Transform _playerTransform;
     private TemperatureManager _temperatureManager;
 
