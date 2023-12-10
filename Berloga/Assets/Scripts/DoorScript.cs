@@ -1,17 +1,49 @@
-using System.Collections;
-using UnityEditor.EventSystems;
-using UnityEngine.SceneManagement;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DoorScript : MonoBehaviour
 {
-    private void OnMouseDown()
+    public GameObject hint;
+    public bool isPlayerNear = false;
+
+    private void HideHintE()
     {
-        TransferDoor("CampfireMiniGame");
+        hint.SetActive(false);
     }
-    private static void TransferDoor(string scene) 
+
+    private void ShowHintE()
+    {
+        hint.SetActive(true);
+    }
+    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            isPlayerNear = true;
+            ShowHintE();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            isPlayerNear = false;
+            HideHintE();
+        }
+    }
+
+    public void GoToRoom(string scene)
     {
         SceneManager.LoadScene(scene);
+    }
+
+    void Update()
+    {
+        if (isPlayerNear && Input.GetKeyDown(KeyCode.E))
+        {
+            GoToRoom("Room");
+        }
     }
 }
