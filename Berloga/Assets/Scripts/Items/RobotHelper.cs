@@ -20,11 +20,11 @@ public class RobotHelper : Item
     private float _distance;
     private States _state;
     private GameObject _currentTarget;
-
+    private Stack<GameObject> _stack;
+    private bool _foodFound;
 
     public void FindFood()
     {
-        _state = States.Finding;
         var food = FindObjectsOfType<FoodPickup>();
         GameObject obj = null;
         float distance = 0f;
@@ -45,7 +45,12 @@ public class RobotHelper : Item
                 distance = Vector3.Distance(transform.position, obj.transform.position);
             }
         }
-        _currentTarget = obj;
+        if (obj != null)
+        {
+            _state = States.Finding;
+            _currentTarget = obj;
+            _stack.Push(obj);
+        }
     }
 
     private void FixedUpdate()
@@ -54,6 +59,18 @@ public class RobotHelper : Item
         if (_state == States.Follow) 
         {
             _currentTarget = _controller.gameObject;
+        }
+        else if (_state == States.Finding)
+        {
+            if (_stack.Count == 0)
+            {
+                _state = States.Follow;
+            }
+            if (!_foodFound && _stack.Count > 0)
+            {
+                _foodFound = true;
+                _currentTarget = _stack.Pop();
+            }
         }
         if (Vector3.Distance(transform.position, _controller.transform.position) > _distance)
         {
@@ -68,10 +85,11 @@ public class RobotHelper : Item
     private void Awake()
     {
         _state = States.Follow; _currentTarget = _controller.gameObject;
+        _stack = new Stack<GameObject>();
     }
 
     public void FoodPicked()
     {
-
+        _foodFound = false;
     }
 }

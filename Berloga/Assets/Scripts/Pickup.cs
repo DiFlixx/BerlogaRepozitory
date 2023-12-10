@@ -18,12 +18,14 @@ public abstract class Pickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("RobotHelper"))
+        Debug.Log(collision.gameObject);
+        if (collision.TryGetComponent<RobotHelper>(out var robot))
         {
             for (int i = 0; i < _inventory.slots.Length; i++)
             {
                 if (_inventory.slots[i].IsFull == false)
                 {
+                    robot.FoodPicked();
                     _inventory.slots[i].IsFull = true;
                     Instantiate(Itembutton, _inventory.slots[i].transform, false).Init(_inventory.slots[i], GetAction());
                     Destroy(gameObject);
