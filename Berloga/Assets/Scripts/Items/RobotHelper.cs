@@ -4,7 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class RobotHelper : Item
+public class RobotHelper : Item, ITurnOnable, ITurnOffable
 {
     enum States
     {
@@ -84,11 +84,11 @@ public class RobotHelper : Item
         }
         if (Vector3.Distance(transform.position, _controller.transform.position) > _distance)
         {
-            _inventoryUI.gameObject.SetActive(false);
+            TurnOff();
         }
         else
         {
-            _inventoryUI.gameObject.SetActive(true);
+            TurnOn();
         }
         Vector2 currentPosition = _rb.position;
         Vector2 movement = currentPosition - previousPosition;
@@ -135,5 +135,15 @@ public class RobotHelper : Item
     void Flip()
     {
         _spriteRenderer.flipX = !_spriteRenderer.flipX;
+    }
+
+    public void TurnOn()
+    {
+        _inventoryUI.gameObject.SetActive(true);
+    }
+
+    public void TurnOff()
+    {
+        _inventoryUI.gameObject.SetActive(false);
     }
 }

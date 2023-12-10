@@ -14,6 +14,11 @@ GameObject:
   - component: {fileID: 7675519591216193826}
   - component: {fileID: 287820749372301473}
   - component: {fileID: 1763319446290711725}
+  - component: {fileID: 1158456137819174509}
+  - component: {fileID: 9062225757169028728}
+  - component: {fileID: 8586014727428030512}
+  - component: {fileID: 1029629326495097493}
+  - component: {fileID: 1930415788339751623}
   m_Layer: 0
   m_Name: RobotHelper
   m_TagString: Untagged
@@ -106,8 +111,9 @@ MonoBehaviour:
   highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _speed: 5
   _controller: {fileID: 0}
+  _inventoryUI: {fileID: 0}
   _inventory: {fileID: 0}
-  _distance: 0
+  _distance: 5
 --- !u!58 &7675519591216193826
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -172,6 +178,95 @@ MonoBehaviour:
   _commandView: {fileID: 2777275366860303438, guid: 0b07bb407d2865c488e264cc11e6398c, type: 3}
   _commandName: "\u041D\u0430\u0439\u0442\u0438 \u0435\u0434\u0443"
   _robotHelper: {fileID: 1795498862655388029}
+--- !u!50 &1158456137819174509
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8691050027884170166}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 1
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &9062225757169028728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8691050027884170166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c5e918b271972940b1384a4490ac5a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _commandView: {fileID: 2777275366860303438, guid: fae15bdc5994cd847acf707e69b5bb44, type: 3}
+  _commandName: "\u0420\u043E\u0431\u043E\u0442 \u0434\u0430\u043B\u0435\u043A\u043E
+    \u043E\u0442 \u0438\u0433\u0440\u043E\u043A\u0430"
+  _distance: 4
+--- !u!114 &8586014727428030512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8691050027884170166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeef8c754b796094ba77157157771cb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _commandView: {fileID: 2777275366860303438, guid: fae15bdc5994cd847acf707e69b5bb44, type: 3}
+  _commandName: "\u0420\u043E\u0431\u043E\u0442 \u0440\u044F\u0434\u043E\u043C \u0441
+    \u0438\u0433\u0440\u043E\u043A\u043E\u043C"
+  _distance: 4
+--- !u!114 &1029629326495097493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8691050027884170166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8cccfab49260b7449c089fce2b84de4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _commandView: {fileID: 2777275366860303438, guid: 0b07bb407d2865c488e264cc11e6398c, type: 3}
+  _commandName: "\u0412\u044B\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u0434\u043E\u0441\u0442\u0443\u043F
+    \u043A \u0445\u0440\u0430\u043D\u0438\u043B\u0438\u0449\u0443"
+--- !u!114 &1930415788339751623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8691050027884170166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2394f61024e02644e83e0916ddca08b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _commandView: {fileID: 2777275366860303438, guid: 0b07bb407d2865c488e264cc11e6398c, type: 3}
+  _commandName: "\u0412\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u0434\u043E\u043F\u0441\u0442\u0443\u043F
+    \u043A \u0445\u0440\u0430\u043D\u0438\u043B\u0438\u0449\u0443"
 --- !u!1001 &4150392006826635607
 PrefabInstance:
   m_ObjectHideFlags: 0
