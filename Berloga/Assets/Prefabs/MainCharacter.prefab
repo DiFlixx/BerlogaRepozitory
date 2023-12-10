@@ -165,6 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
+  climbSpeed: 0
   _jumpForce: 20
   _smoothness: 7
   _camera: {fileID: 0}
