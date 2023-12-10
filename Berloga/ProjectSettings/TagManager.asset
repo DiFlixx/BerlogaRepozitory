@@ -11,6 +11,10 @@ TagManager:
   - InventoryItem
   - Cross
   - HeatArea
+  - fire
+  - string
+  - stick2
+  - plank
   layers:
   - Default
   - TransparentFX
