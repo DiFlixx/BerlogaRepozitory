@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1431501892, guid: 62c4f9b5c391ca84fa181b9558f54493, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 22a58e5a469a33f44b8328cd1dced971, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -110,8 +110,8 @@ MonoBehaviour:
   _codePanel: {fileID: 4698198392318480022}
   highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _heatArea: {fileID: 7026366357683256639}
-  _turnOffImage: {fileID: -1431501892, guid: 62c4f9b5c391ca84fa181b9558f54493, type: 3}
-  _turnOnImage: {fileID: -1973738153, guid: 62c4f9b5c391ca84fa181b9558f54493, type: 3}
+  _turnOffImage: {fileID: 21300000, guid: 22a58e5a469a33f44b8328cd1dced971, type: 3}
+  _turnOnImage: {fileID: 21300000, guid: d811a077f2fbc8844806100a653c7c5e, type: 3}
 --- !u!114 &7804733289683633754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _commandView: {fileID: 2777275366860303438, guid: 0b07bb407d2865c488e264cc11e6398c, type: 3}
   _commandName: "\u041E\u0431\u043E\u0433\u0440\u0435\u0432\u0430\u0442\u044C"
-  _heatArea: {fileID: 7026366357683256639}
+  _heater: {fileID: 0}
 --- !u!114 &6635083771265374601
 MonoBehaviour:
   m_ObjectHideFlags: 0

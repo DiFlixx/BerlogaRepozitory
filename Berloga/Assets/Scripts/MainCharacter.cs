@@ -47,14 +47,11 @@ public class PlayerController : MonoBehaviour
         CameraMove();
         Flip();
         Jump();
-        if (VerticalMove > 0.5f)
-            Debug.Log(VerticalMove);
     }
 
     void Jump()
     {
         var hit = Physics2D.BoxCast(transform.position, new Vector3(0.6f, 3, 0), 0, Vector2.down, 0.3f, LayerMask.GetMask("Ground"));
-        Debug.Log(hit.collider);
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && hit.collider != null)
         {
             rb.velocity = Vector2.up * _jumpForce;

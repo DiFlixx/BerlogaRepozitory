@@ -197,12 +197,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMouse: 0
-  cooldownTime: 5
   _codePanel: {fileID: 903371901524098911}
   highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  cooldownTime: 5
   _food: {fileID: 8365682423475068168, guid: 0d05f3fa4bd1e05488e4b47514e6f561, type: 3}
   _turnedOff: {fileID: 21300000, guid: dadd22a00208f5043ab1249ea8d3cd5a, type: 3}
   _turnedOn: {fileID: 21300000, guid: 0381038780bb39f4cb2e4d431d899ec3, type: 3}
+  OnFoodDropped:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2590296568842932713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,6 +364,10 @@ PrefabInstance:
       propertyPath: _owner
       value: 
       objectReference: {fileID: 3673890855723800777}
+    - target: {fileID: 9075317263608817645, guid: b07d9ee446f4cf841bfe5dfef0253cd9, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
