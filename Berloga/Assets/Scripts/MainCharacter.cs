@@ -39,13 +39,16 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        float HorizontalMove = Input.GetAxis("Horizontal") * speed;
+        float VerticalMove = rb.velocity.y;
+        _animator.SetFloat("HorizontalMove", Mathf.Abs(HorizontalMove));
+        _animator.SetFloat("VerticalMove", VerticalMove);
         Move();
         CameraMove();
         Flip();
         Jump();
-
-        float HorizontalMove = Input.GetAxis("Horizontal") * speed;
-        _animator.SetFloat("HorizontalMove", Mathf.Abs(HorizontalMove));
+        if (VerticalMove > 0.5f)
+            Debug.Log(VerticalMove);
     }
 
     void Jump()
