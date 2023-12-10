@@ -15,6 +15,7 @@ TagManager:
   - string
   - stick2
   - plank
+  - LadderTrigger
   layers:
   - Default
   - TransparentFX

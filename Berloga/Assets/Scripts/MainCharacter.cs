@@ -7,12 +7,14 @@ using UnityEngine.Serialization;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed;
-    
+
+    [SerializeField] private float climbSpeed;
+
     [SerializeField]
     private float _jumpForce;
     [SerializeField]
     private float _smoothness;
-    
+
     [SerializeField]
     private Camera _camera;
 
@@ -25,10 +27,11 @@ public class PlayerController : MonoBehaviour
 
     private int _extraJumps;
     public int extraJumpsValue;
-    
+    private bool _isOnLadder;
+
     [SerializeField] private AudioSource snowJumpAudio;
     [SerializeField] private AudioSource doubleJumpAudio;
-    
+
     void Start()
     {
         _temperatureManager = FindAnyObjectByType<TemperatureManager>();
@@ -40,13 +43,22 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         float HorizontalMove = Input.GetAxis("Horizontal") * speed;
-        float VerticalMove = rb.velocity.y;
-        _animator.SetFloat("HorizontalMove", Mathf.Abs(HorizontalMove));
-        _animator.SetFloat("VerticalMove", VerticalMove);
-        Move();
-        CameraMove();
-        Flip();
-        Jump();
+        float verticalInput = Input.GetAxis("Vertical");
+
+        if (_isOnLadder)
+        {
+            ClimbLadder(verticalInput);
+        }
+        else
+        {
+            float VerticalMove = rb.velocity.y;
+            _animator.SetFloat("HorizontalMove", Mathf.Abs(HorizontalMove));
+            _animator.SetFloat("VerticalMove", VerticalMove);
+            Move();
+            CameraMove();
+            Flip();
+            Jump();
+        }
     }
 
     void Jump()
@@ -106,6 +118,7 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = true;
         }
+
     }
 
     void OnCollisionExit2D(Collision2D collision)
@@ -122,6 +135,25 @@ public class PlayerController : MonoBehaviour
         {
             _temperatureManager.temperatureDecayRate = -3;
         }
+        
+    }
+
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("LadderTrigger"))
+        {
+            if (Input.GetKey(KeyCode.W))
+            {
+                Debug.Log("W key pressed");
+                _isOnLadder = true;
+                rb.gravityScale = 0;
+            }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                _isOnLadder = false;
+                rb.gravityScale = 5;
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -130,6 +162,16 @@ public class PlayerController : MonoBehaviour
         {
             _temperatureManager.temperatureDecayRate = 1;
         }
+        if (collision.CompareTag("LadderTrigger"))
+        {
+            _isOnLadder = false;
+            rb.gravityScale = 5;
+        }
+    }
+
+    void ClimbLadder(float verticalInput)
+    {
+        Vector2 climbVelocity = new Vector2(rb.velocity.x, verticalInput * climbSpeed);
+        rb.velocity = climbVelocity;
     }
 }
-

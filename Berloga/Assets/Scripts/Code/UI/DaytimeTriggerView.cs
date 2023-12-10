@@ -14,10 +14,10 @@ public class DaytimeTriggerView : CommandView
     {
         _keyValuePairs = new Dictionary<string, DayTime>()
         {
-            { "Утро", DayTime.Morning },
-            { "День", DayTime.Day },
-            { "Вечер", DayTime.Evening },
-            { "Ночь", DayTime.Night }
+            { "Утро наступило", DayTime.Morning },
+            { "День наступил", DayTime.Day },
+            { "Вечер наступил", DayTime.Evening },
+            { "Ночь наступила", DayTime.Night }
         };
         dropdown.ClearOptions();
         foreach (var key in _keyValuePairs.Keys)
