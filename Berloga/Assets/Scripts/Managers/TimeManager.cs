@@ -33,14 +33,6 @@ public class TimeManager : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        if (time <= _dayPartTime/2) 
-        {
-            _globalLight.intensity = 0.3f + time / _dayPartTime;
-        }
-        else 
-        { 
-            _globalLight.intensity = 1f - time / _dayPartTime; 
-        }
         if (time > _dayPartTime) 
         {
             time = 0;

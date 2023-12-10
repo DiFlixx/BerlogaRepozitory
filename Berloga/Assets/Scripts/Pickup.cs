@@ -18,7 +18,6 @@ public abstract class Pickup : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject);
         if (collision.TryGetComponent<RobotHelper>(out var robot))
         {
             for (int i = 0; i < _inventory.slots.Length; i++)
