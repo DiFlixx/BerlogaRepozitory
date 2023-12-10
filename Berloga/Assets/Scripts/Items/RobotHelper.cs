@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RobotHelper : Item
@@ -15,6 +17,8 @@ public class RobotHelper : Item
     [SerializeField]
     private PlayerController _controller;
     [SerializeField]
+    private GameObject _inventoryUI;
+    [SerializeField]
     private Inventory _inventory;
     [SerializeField]
     private float _distance;
@@ -25,6 +29,10 @@ public class RobotHelper : Item
 
     public void FindFood()
     {
+        if (IsInventoryFull())
+        {
+            return;
+        }
         var food = FindObjectsOfType<FoodPickup>();
         GameObject obj = null;
         float distance = 0f;
@@ -55,14 +63,13 @@ public class RobotHelper : Item
 
     private void FixedUpdate()
     {
-        transform.position = Vector3.Lerp(transform.position, _currentTarget.transform.position, Time.deltaTime * _speed);
         if (_state == States.Follow) 
         {
             _currentTarget = _controller.gameObject;
         }
         else if (_state == States.Finding)
         {
-            if (_stack.Count == 0)
+            if (_stack.Count == 0 || IsInventoryFull())
             {
                 _state = States.Follow;
             }
@@ -74,12 +81,14 @@ public class RobotHelper : Item
         }
         if (Vector3.Distance(transform.position, _controller.transform.position) > _distance)
         {
-            _inventory.gameObject.SetActive(false);
+            _inventoryUI.gameObject.SetActive(false);
         }
         else
         {
-            _inventory.gameObject.SetActive(true);
+            _inventoryUI.gameObject.SetActive(true);
         }
+        if (_currentTarget != null)
+        transform.position = Vector3.Lerp(transform.position, _currentTarget.transform.position, Time.deltaTime * _speed);
     }
 
     private void Awake()
@@ -91,5 +100,22 @@ public class RobotHelper : Item
     public void FoodPicked()
     {
         _foodFound = false;
+        if (IsInventoryFull())
+        {
+            _stack.Clear();
+        }
+    }
+
+    private bool IsInventoryFull()
+    {
+        bool full = true;
+        foreach (Slot slot in _inventory.slots)
+        {
+            if (!slot.IsFull)
+            {
+                full = false; break;
+            }
+        }
+        return full;
     }
 }

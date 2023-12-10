@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6089215224520566143}
   - component: {fileID: 2352680563012788736}
-  - component: {fileID: 1255450594876856293}
   - component: {fileID: 518452290294992024}
+  - component: {fileID: 5673962447272702753}
   m_Layer: 0
-  m_Name: Chips
+  m_Name: Stick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0b250b51c4a9ac5469bec6e2614e319c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 560b5ab0dbea79940ac2ffc5aab633d0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,19 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1255450594876856293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8365682423475068168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d60393c9b7a7d4b49aea7a01cbff090f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Itembutton: {fileID: 7941792739253421799, guid: 3e3a828e37f7ac04a8a295ec11377ea3, type: 3}
 --- !u!61 &518452290294992024
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -135,7 +122,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -144,3 +131,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64, y: 0.64}
   m_EdgeRadius: 0
+--- !u!114 &5673962447272702753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8365682423475068168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c25c978588c9adf40baec0e19f82d827, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Itembutton: {fileID: 7941792739253421799, guid: 457cb9032f4cd544f9907ffcce287b92, type: 3}

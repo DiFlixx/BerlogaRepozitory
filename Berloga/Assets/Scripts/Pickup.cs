@@ -16,7 +16,7 @@ public abstract class Pickup : MonoBehaviour
         _inventory = FindAnyObjectByType<Inventory>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         Debug.Log(collision.gameObject);
         if (collision.TryGetComponent<RobotHelper>(out var robot))
@@ -26,6 +26,19 @@ public abstract class Pickup : MonoBehaviour
                 if (_inventory.slots[i].IsFull == false)
                 {
                     robot.FoodPicked();
+                    _inventory.slots[i].IsFull = true;
+                    Instantiate(Itembutton, _inventory.slots[i].transform, false).Init(_inventory.slots[i], GetAction());
+                    Destroy(gameObject);
+                    break;
+                }
+            }
+        }
+        else if (collision.CompareTag("Player"))
+        {
+            for (int i = 0; i < _inventory.slots.Length; i++)
+            {
+                if (_inventory.slots[i].IsFull == false)
+                {
                     _inventory.slots[i].IsFull = true;
                     Instantiate(Itembutton, _inventory.slots[i].transform, false).Init(_inventory.slots[i], GetAction());
                     Destroy(gameObject);
