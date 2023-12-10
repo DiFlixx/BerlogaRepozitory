@@ -1,6 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class DialogueTrigger : MonoBehaviour
+{
+    public Dialogue dialogue;
+
+    public void TriggerDialogue()
+    {
+        DialogueManager.Instance.StartDialogue(dialogue);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            TriggerDialogue();
+        }
+    }
+}
+
 [System.Serializable]
 public class DialogueCharacter
 {
@@ -20,22 +38,4 @@ public class DialogueLine
 public class Dialogue
 {
     public List<DialogueLine> dialogueLines = new List<DialogueLine>();
-}
-
-public class DialogueTrigger : MonoBehaviour
-{
-    public Dialogue dialogue;
-
-    public void TriggerDialogue()
-    {
-        DialogueManager.Instance.StartDialogue(dialogue);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            TriggerDialogue();
-        }
-    }
 }
