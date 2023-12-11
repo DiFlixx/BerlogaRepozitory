@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DeathScene.unity
     guid: 10324c3215176cf488113a860ee9c4d5
+  - enabled: 1
+    path: Assets/Scenes/FireGame.unity
+    guid: 5817ba6a173bd6847998c8b883a9a9cd
   m_configObjects: {}
