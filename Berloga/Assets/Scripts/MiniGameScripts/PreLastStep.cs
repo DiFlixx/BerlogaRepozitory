@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class PreLastEtap : MonoBehaviour
 {
@@ -20,12 +21,19 @@ public class PreLastEtap : MonoBehaviour
         {
             FireThing.transform.position = gameObject.transform.position;
             Destroy(gameObject);
+            BackToMain();
         }
+
         else
         {
             clicks++;
         }
 
         sound.Play();
+    }
+
+    private void BackToMain()
+    {
+        SceneManager.LoadScene("Main");
     }
 }
