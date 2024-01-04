@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -16,11 +17,31 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Camera _camera;
 
+    [SerializeField]
+    private Rigidbody2D _rb1;
+    [SerializeField]
+    private Rigidbody2D _rb2;
+
+    [SerializeField]
+    private Animator _a1;
+    [SerializeField]
+    private Animator _a2;
+
+    [SerializeField]
+    private Transform _t1;
+    [SerializeField]
+    private Transform _t2;
+
+    [SerializeField]
+    private RobotHelper _robot;
+    
     private Animator _animator;
     private Rigidbody2D rb;
     private bool isGrounded;
     private Transform _playerTransform;
     private TemperatureManager _temperatureManager;
+
+    private int _currentChar = 1;
 
     [SerializeField] private AudioSource snowJumpAudio;
 
@@ -30,6 +51,37 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         _playerTransform = GetComponent<Transform>();
+    }
+
+    private void ChangeCharacter()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (_currentChar == 1)
+            {
+                _currentChar = 2;
+                rb = _rb2;
+                _animator.SetFloat("HorizontalMove", 0);
+                _animator.SetFloat("VerticalMove", 0);
+                rb.velocity = Vector3.zero;
+                _animator = _a2;
+                _playerTransform = _t2;
+                _robot.ChangePlayer(2);
+                
+            }
+            else
+            {
+                _currentChar = 1;
+                rb = _rb1;
+                rb.velocity = Vector3.zero;
+                _animator.SetFloat("HorizontalMove", 0);
+                _animator.SetFloat("VerticalMove", 0);
+                _animator = _a1;
+                _playerTransform = _t1;
+                _robot.ChangePlayer(1);
+                
+            }
+        }
     }
 
     void Update()
@@ -43,6 +95,7 @@ public class PlayerController : MonoBehaviour
         CameraMove();
         Flip();
         Jump();
+        ChangeCharacter();
     }
 
     void Jump()
@@ -75,7 +128,7 @@ public class PlayerController : MonoBehaviour
 
     private void Flip()
     {
-        Vector3 currentScale = transform.localScale;
+        Vector3 currentScale = _playerTransform.localScale;
         if (rb.velocity.x < 0)
         {
             currentScale.x = -Mathf.Abs(currentScale.x);
@@ -84,7 +137,7 @@ public class PlayerController : MonoBehaviour
         {
             currentScale.x = Mathf.Abs(currentScale.x);
         }
-        transform.localScale = currentScale;
+        _playerTransform.localScale = currentScale;
     }
 
 
