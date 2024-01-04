@@ -22,16 +22,6 @@ public class SlotItem : MonoBehaviour
         _button.onClick.AddListener(action.Invoke);
     }
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
     private void OnDestroy()
     {
         _button.onClick.RemoveAllListeners();
