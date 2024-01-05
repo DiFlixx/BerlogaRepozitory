@@ -1747,7 +1747,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4720802887242898087, guid: 5afa70febee157340889996bca132463, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.94
+      value: 27.59
       objectReference: {fileID: 0}
     - target: {fileID: 4720802887242898087, guid: 5afa70febee157340889996bca132463, type: 3}
       propertyPath: m_LocalPosition.y
@@ -16731,11 +16731,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4720802887242898087, guid: 5afa70febee157340889996bca132463, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.035
+      value: 23.28
       objectReference: {fileID: 0}
     - target: {fileID: 4720802887242898087, guid: 5afa70febee157340889996bca132463, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.132
+      value: 0.53
       objectReference: {fileID: 0}
     - target: {fileID: 4720802887242898087, guid: 5afa70febee157340889996bca132463, type: 3}
       propertyPath: m_LocalPosition.z
@@ -19932,7 +19932,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d91e1560f261045bed5ac582cc595e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 784302780}
+  player1: {fileID: 784302780}
+  player2: {fileID: 1258215806}
   index: 1
 --- !u!61 &1990059843
 BoxCollider2D:
