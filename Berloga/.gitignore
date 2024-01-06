@@ -395,4 +395,3 @@ FodyWeavers.xsd
 *.sln.iml
 .vs/ProjectSettings.json
 .vs/slnx.sqlite
-Berloga/Assets/Scripts/Parallax/SimpleMove.cs.meta
